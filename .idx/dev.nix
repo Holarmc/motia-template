@@ -8,7 +8,12 @@
     # pkgs.go
     # pkgs.python311
     # pkgs.python311Packages.pip
-    # pkgs.nodejs_20
+    # pkgs.nodejs_22
+    pkgs.fnm
+    pkgs.gnumake   # The 'make' tool you are missing
+    pkgs.gcc
+    pkgs.python3   # <--- ADD THIS
+    pkgs.python3Packages.pip
     # pkgs.nodePackages.nodemon
   ];
   # Sets environment variables in the workspace
@@ -40,14 +45,17 @@
       # Runs when a workspace is first created
       onCreate = {
         # Example: install JS dependencies from NPM
-        # npm-install = "npm install";
+        npm-install = "npm install";
         # Open editors for the following files by default, if they exist:
-        default.openFiles = [ ".idx/dev.nix" "README.md" ];
+        # default.openFiles = [ ".idx/dev.nix" "README.md" ];
+        install-node = "fnm install 24.12.0 && fnm use 24.12.0 && fnm default 24.12.0";
+
       };
       # Runs when the workspace is (re)started
       onStart = {
         # Example: start a background task to watch and re-build backend code
         # watch-backend = "npm run watch-backend";
+        # install-node = "fnm install 24.12.0 && fnm use 24.12.0 && fnm default 24.12.0";
       };
     };
   };
