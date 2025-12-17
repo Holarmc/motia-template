@@ -45,7 +45,7 @@
       # Runs when a workspace is first created
       onCreate = {
         # Example: install JS dependencies from NPM
-        npm-install = "npm install";
+        # npm-install = "npm install";
         # Open editors for the following files by default, if they exist:
         # default.openFiles = [ ".idx/dev.nix" "README.md" ];
         install-node = "fnm install 24.12.0 && fnm use 24.12.0 && fnm default 24.12.0";
@@ -56,6 +56,14 @@
         # Example: start a background task to watch and re-build backend code
         # watch-backend = "npm run watch-backend";
         # install-node = "fnm install 24.12.0 && fnm use 24.12.0 && fnm default 24.12.0";
+         setup-full = ''
+          cd src && \
+          npm install && \
+          python3 -m venv python_modules && \
+          source python_modules/bin/activate && \
+          pip install -r requirements.txt
+        '';
+        # init-shell = "source src/python_modules/bin/activate"; 
       };
     };
   };
